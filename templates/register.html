@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="margin-left: 10px;">
+<h1 class="text-light">Регистрация</h1>
+<form action="" method="post">
+    {{ form.hidden_tag() }}
+    <p>
+        <label class="text-light">Почта</label><br>
+        {{ form.email(class="form-control bg-dark text-light", type="email") }}<br>
+        {% for error in form.email.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        <label class="text-light">Имя пользователя:</label><br>
+        {{ form.name(class="form-control bg-dark text-light") }}<br>
+        {% for error in form.name.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        <label class="text-light">Пароль</label><br>
+        {{ form.password(class="form-control bg-dark text-light", type="password") }}<br>
+        {% for error in form.password.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        <label class="text-light">Повторите пароль</label><br>
+        {{ form.password_again(class="form-control bg-dark text-light", type="password") }}<br>
+        {% for error in form.password_again.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>{{ form.submit(type="submit", class="btn btn-warning text-light") }}</p>
+    {{message}}
+</form>
+</div>
+{% endblock %}

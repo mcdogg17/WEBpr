@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% if lobby_id %}
+        <div class="container">
+            <div class="row">
+                <div class="col-12 d-flex justify-content-center p-2 pt-3">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-outline-danger" id="leave_lobby">Покинуть лобби</button>
+                        <button type="button" class="btn btn-outline-success" id="start_game">Начать игру</button>
+                    </div>
+                </div>
+                <div class="col-12 col-md-3 p-2">
+                    <table class="table table-dark">
+                        <tr>
+                            <td id="player-1">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td id="player-2">&nbsp;</td>
+                        </tr>
+                    </table>
+                    <div class="row m-2">
+                        <label for="lbid" class="text-light form-label">Код приглашения:</label>
+                        <input type="text" id="lbid" class="bg-dark text-light form-control" value="{{ lobby_id }}">
+                    </div>
+                </div>
+                <div class="col-12 col-md-9 p-2">
+                    <textarea rows="20" id="chat" class="form-control bg-dark text-light" readonly></textarea>
+                    <div class="row py-2">
+                        <div class="col-9">
+                            <input type="text" id="msg_text" class="bg-dark text-light form-control" placeholder="Введите сообщение">
+                        </div>
+                        <div class="col-3">
+                            <button type="button" class="btn btn-info btn-block form-control text-light" id="send_msg">Отправить</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="container">
+            <div class="row">
+                <div class="col-12 mt-3 d-flex justify-content-center">
+                    <div class="form-inline">
+                        <label class="text-light form-label m-2">Если у вас нет кода приглашения, то вы можете: </label>
+                        <button type="button" class="btn btn-info text-light m-2" id="create_lobby">Создать лобби</button>
+                    </div>
+                </div>
+                <div class="col-12 mt-3 d-flex justify-content-center">
+                    <div class="form-inline">
+                        <label for="code" class="text-light m-2">Код приглашения:</label>
+                        <input type="text" id="code" class="form-control bg-dark text-light m-2">
+                        <button type="button" class="btn btn-success text-light m-2" id="join_lobby">Войти в лобби</button>
+                    </div>
+                </div>
+                <div class="col-12 col-md-8 mx-auto mt-5">
+                    <h5 class="text-light">Список доступных игр:</h5>
+                    <div class="list-group" id="lobbies_list">
+                        {% for lobby in lobbies %}
+                            <a id="{{ lobby[1] }}" class="list-group-item list-group-item-action list-group-item-dark"
+                               onclick="">
+                                {{ lobby[0] }}
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    <script src="/static/js/main_page.js"></script>
+    <script src="/static/js/lobby.js"></script>
+{% endblock %}
